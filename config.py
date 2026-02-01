@@ -39,7 +39,7 @@ GMAIL_SCOPES = ["https://www.googleapis.com/auth/gmail.readonly"]
 CLAUDE_MODEL = os.getenv("CLAUDE_MODEL", "claude-3-5-haiku-20241022")
 
 # --- Scoring ---
-SCORE_THRESHOLD = int(os.getenv("SCORE_THRESHOLD", "56"))
+SCORE_THRESHOLD = int(os.getenv("SCORE_THRESHOLD", "71"))
 
 # --- Reddit subreddits to monitor ---
 SUBREDDITS = [
