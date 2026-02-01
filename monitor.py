@@ -7,7 +7,7 @@ import config
 import storage
 import scoring
 import notify
-from sources import reddit, github, huggingface, alphaxiv
+from sources import reddit, github, huggingface, alphaxiv_web, alphaxiv_digest
 
 
 def run():
@@ -24,7 +24,8 @@ def run():
         ("Reddit", reddit.fetch_signals),
         ("GitHub", github.fetch_signals),
         ("Hugging Face", huggingface.fetch_signals),
-        ("AlphaXiv", alphaxiv.fetch_signals),
+        ("AlphaXiv Web", alphaxiv_web.fetch_signals),
+        ("AlphaXiv Digest", alphaxiv_digest.fetch_signals),
     ]
 
     for name, fetch_fn in sources:

@@ -17,9 +17,23 @@ HF_TOKEN = os.getenv("HF_TOKEN", "")
 SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL", "")
 SLACK_USER_ID = os.getenv("SLACK_USER_ID", "")
 
-# --- Google Sheets (AlphaXiv) ---
-GOOGLE_SHEETS_CREDS = os.getenv("GOOGLE_SHEETS_CREDS", "credentials.json")
-ALPHAXIV_SHEET_ID = os.getenv("ALPHAXIV_SHEET_ID", "")
+# --- AlphaXiv Web Scraping ---
+ALPHAXIV_TRENDING_URL = os.getenv("ALPHAXIV_TRENDING_URL", "https://alphaxiv.org/explore")
+
+# --- AlphaXiv Gmail Digest ---
+ALPHAXIV_GMAIL_QUERY = os.getenv(
+    "ALPHAXIV_GMAIL_QUERY",
+    'from:contact@alphaxiv.org subject:"Trending Papers" newer_than:7d',
+)
+
+# --- Gmail OAuth (reuses auto-bdr credentials) ---
+GMAIL_CREDENTIALS_FILE = os.getenv(
+    "GMAIL_CREDENTIALS_FILE",
+    str(PROJECT_DIR.parent / "auto-bdr" / "client_secret_360799449442-9kqasva5frsqjbu03s3bdl28r5djt21g.apps.googleusercontent.com.json"),
+)
+GMAIL_TOKEN_FILE = os.getenv("GMAIL_TOKEN_FILE", str(PROJECT_DIR.parent / "auto-bdr" / "token.json"))
+GMAIL_TOKEN_JSON = os.getenv("GMAIL_TOKEN_JSON", "")
+GMAIL_SCOPES = ["https://www.googleapis.com/auth/gmail.readonly"]
 
 # --- Claude ---
 CLAUDE_MODEL = os.getenv("CLAUDE_MODEL", "claude-haiku-4-20250414")
