@@ -2,8 +2,8 @@ name: Daily Signal Scan
 
 on:
   schedule:
-    # 7:00 AM US Eastern (UTC-5) = 12:00 UTC, weekdays only
-    - cron: '0 12 * * 1-5'
+    # 7:00 AM US Eastern (UTC-5) = 12:00 UTC, every day
+    - cron: '0 12 * * *'
   workflow_dispatch:
 
 permissions:
