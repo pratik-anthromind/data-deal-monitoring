@@ -1,5 +1,6 @@
 .env
-data/
+data/*
+!data/signals.db
 __pycache__/
 *.pyc
 *.pyo
