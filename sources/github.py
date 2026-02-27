@@ -51,11 +51,14 @@ def fetch_signals() -> list[dict]:
     signals = []
     seen_urls = set()
 
+    # Build repo exclusion suffix once
+    exclusions = " ".join(f"-repo:{r}" for r in config.GITHUB_EXCLUDED_REPOS)
+
     # --- Phase 1: Broad OR queries (Plan C) ---
     # 5 queries replace the old 14 narrow per-keyword queries.
     # Keywords are in the query itself so no _matches_keywords() pre-filter needed.
     for query_terms in config.GITHUB_SEARCH_QUERIES:
-        query = f"({query_terms}) is:issue is:open created:>{since}"
+        query = f"({query_terms}) is:issue is:open created:>{since} {exclusions}"
         try:
             resp = requests.get(
                 API_URL,

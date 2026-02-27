@@ -77,6 +77,16 @@ Score LOW (total < 30) if the signal is:
 - News sharing with no personal context
 - Tool builder who solved tooling but doesn't need workforce
 
+### Critical: "Writing About" vs "Experiencing"
+The author must be EXPERIENCING a problem that requires PURCHASING data annotation, RLHF preference data, or human evaluation from an outside vendor. Score LOW (< 20) if:
+- The issue is a task card for the author's OWN development work — building their own website, landing page, or product feature. Writing enterprise-sounding copy does NOT mean they are an enterprise buyer.
+- The issue is a bug report or feature request for a software tool the author uses or builds. Filing a bug against a coding assistant, workflow tool, or open-source library is NOT a signal that the author needs annotation services.
+- The author is describing a hypothetical customer's pain (e.g., a consultant writing a pitch deck, a developer writing marketing copy), not their own operational pain.
+- The project is clearly a personal side project: one contributor, GitHub Pages site, portfolio, hobby analytics app. No team, no customers, no revenue = no budget.
+
+### What a real signal looks like
+The author's COMPANY OR TEAM has a model in production or active training, and data quality is causing measurable business harm: accuracy targets missed, RLHF not converging, eval metrics unreliable, annotation vendor delivering garbage. They are considering or actively seeking an external data service provider.
+
 Real pain is past/present tense with consequences. Academic discussion is general tense without personal stakes.
 
 Respond with ONLY valid JSON, no markdown fences:

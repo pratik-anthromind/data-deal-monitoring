@@ -70,8 +70,16 @@ GITHUB_PRIORITY_REPOS = [
     "axolotl-ai-co/axolotl",     # Fine-tuning framework, lots of training data pain
 ]
 
+# --- GitHub repos to exclude from global keyword searches ---
+# These consistently produce false positives: tool bug trackers, personal pages, etc.
+GITHUB_EXCLUDED_REPOS = [
+    "anthropics/claude-code",       # Claude Code bug tracker — not annotation buyers
+    "anthropics/anthropic-sdk-python",
+    "anthropics/claude-cookbook",
+]
+
 # --- GitHub global search queries (Plan C: broad OR queries, replaces narrow per-keyword loop) ---
-# Each query appends: is:issue is:open created:>{lookback}
+# Each query appends: is:issue is:open created:>{lookback} + repo exclusions
 GITHUB_SEARCH_QUERIES = [
     # Core annotation pain
     '"annotation quality" OR "label noise" OR "noisy labels" OR "bad labels" OR "mislabeled" OR "inter-annotator"',
