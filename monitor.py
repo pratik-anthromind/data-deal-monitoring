@@ -77,8 +77,10 @@ def run():
         storage.save_signal(signal, scores)
         storage.mark_seen(url)
 
-        # Notify if above threshold
-        if total >= config.SCORE_THRESHOLD:
+        # Notify if above threshold (HuggingFace uses a lower threshold)
+        source = signal.get("source", "")
+        threshold = config.HF_SCORE_THRESHOLD if source.startswith("huggingface") else config.SCORE_THRESHOLD
+        if total >= threshold:
             leads_found += 1
             notify.notify_lead(signal, scores)
             storage.mark_notified(url)

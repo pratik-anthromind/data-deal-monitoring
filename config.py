@@ -40,6 +40,7 @@ CLAUDE_MODEL = os.getenv("CLAUDE_MODEL", "claude-haiku-4-5-20251001")
 
 # --- Scoring ---
 SCORE_THRESHOLD = int(os.getenv("SCORE_THRESHOLD", "71"))
+HF_SCORE_THRESHOLD = int(os.getenv("HF_SCORE_THRESHOLD", "55"))
 
 # --- Reddit subreddits to monitor ---
 SUBREDDITS = [
