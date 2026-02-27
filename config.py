@@ -66,8 +66,8 @@ GITHUB_PRIORITY_REPOS = [
     "openai/evals",
     "confident-ai/deepeval",   # LLM eval reliability, direct ICP
     # Fine-tuning practitioners — training data quality complaints
-    "unsloth/unsloth",
-    "meta-llama/llama-recipes",
+    "huggingface/peft",          # Parameter-efficient fine-tuning, active practitioner community
+    "axolotl-ai-co/axolotl",     # Fine-tuning framework, lots of training data pain
 ]
 
 # --- GitHub global search queries (Plan C: broad OR queries, replaces narrow per-keyword loop) ---
