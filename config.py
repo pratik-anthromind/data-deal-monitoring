@@ -40,7 +40,7 @@ CLAUDE_MODEL = os.getenv("CLAUDE_MODEL", "claude-haiku-4-5-20251001")
 
 # --- Scoring ---
 SCORE_THRESHOLD = int(os.getenv("SCORE_THRESHOLD", "71"))
-HF_SCORE_THRESHOLD = int(os.getenv("HF_SCORE_THRESHOLD", "55"))
+HF_SCORE_THRESHOLD = int(os.getenv("HF_SCORE_THRESHOLD", "20"))
 
 # --- Reddit subreddits to monitor ---
 SUBREDDITS = [
@@ -51,12 +51,42 @@ SUBREDDITS = [
 ]
 
 # --- GitHub repos to prioritize (owner/repo) ---
+# Focus: repos where ML practitioners doing post-training (RLHF, DPO, fine-tune, eval)
+# file issues about data quality. These users ARE the ICP, not researchers or tool devs.
 GITHUB_PRIORITY_REPOS = [
+    # Annotation / label quality tools — users here have noisy label pain
     "HumanSignal/label-studio",
     "argilla-io/argilla",
-    "opencv/cvat",
+    "cleanlab/cleanlab",       # Tool for finding label noise — users ARE experiencing it
+    "snorkel-team/snorkel",    # Programmatic labeling frustration
+    # RLHF / post-training — preference data quality complaints live here
+    "huggingface/trl",         # RLHF/DPO/PPO library, post-training teams
+    # Eval reliability — teams discovering ground truth is noisy
     "EleutherAI/lm-evaluation-harness",
+    "openai/evals",
+    "confident-ai/deepeval",   # LLM eval reliability, direct ICP
+    # Fine-tuning practitioners — training data quality complaints
+    "unsloth/unsloth",
+    "meta-llama/llama-recipes",
 ]
+
+# --- GitHub global search queries (Plan C: broad OR queries, replaces narrow per-keyword loop) ---
+# Each query appends: is:issue is:open created:>{lookback}
+GITHUB_SEARCH_QUERIES = [
+    # Core annotation pain
+    '"annotation quality" OR "label noise" OR "noisy labels" OR "bad labels" OR "mislabeled" OR "inter-annotator"',
+    # RLHF/preference data (post-training specific)
+    '"preference data" OR "RLHF data" OR "reward model" OR "DPO data" OR "alignment data"',
+    # Buying intent — direct vendor search
+    '"looking for annotators" OR "labeling service" OR "annotation vendor" OR "need labeled data" OR "human raters"',
+    # Competitor frustration
+    '"Scale AI" OR "Appen" OR "MTurk" OR "Surge AI" OR "Labelbox" OR "Toloka"',
+    # Synthetic disillusionment + training data failure
+    '"synthetic data" OR "GPT-generated" OR "model collapse" OR "LLM-generated" "quality" OR "not working" OR "degraded"',
+]
+
+# --- Lookback window for GitHub issue scanning ---
+GITHUB_LOOKBACK_DAYS = 14
 
 # --- Hugging Face datasets to watch for health/discussions ---
 HF_WATCHED_DATASETS = [
@@ -98,7 +128,15 @@ FRUSTRATION_KEYWORDS = [
 SYNTHETIC_DISILLUSIONMENT_KEYWORDS = [
     "synthetic data quality", "model collapse", "GPT-generated data",
     "synthetic vs human", "distillation not working",
-    "LLM-generated training data",
+    "LLM-generated training data", "LLM-generated labels",
+    "AI-generated training data", "synthetic not working", "synthetic data failure",
+]
+
+POST_TRAINING_KEYWORDS = [
+    "fine-tune not working", "fine-tuning quality", "RLHF not converging",
+    "reward hacking", "preference disagreement", "eval not reliable",
+    "benchmark noise", "ground truth noise", "evaluation reliability",
+    "training data noise", "annotation consistency",
 ]
 
 BUDGET_KEYWORDS = [
@@ -110,7 +148,8 @@ BUDGET_KEYWORDS = [
 ALL_KEYWORDS = (
     PAIN_KEYWORDS + NEED_KEYWORDS + RLHF_KEYWORDS +
     COMPETITOR_KEYWORDS + FRUSTRATION_KEYWORDS +
-    SYNTHETIC_DISILLUSIONMENT_KEYWORDS + BUDGET_KEYWORDS
+    SYNTHETIC_DISILLUSIONMENT_KEYWORDS + BUDGET_KEYWORDS +
+    POST_TRAINING_KEYWORDS
 )
 
 # --- Paths ---
