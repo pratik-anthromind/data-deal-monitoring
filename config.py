@@ -36,7 +36,7 @@ GMAIL_TOKEN_JSON = os.getenv("GMAIL_TOKEN_JSON", "")
 GMAIL_SCOPES = ["https://www.googleapis.com/auth/gmail.readonly"]
 
 # --- Claude ---
-CLAUDE_MODEL = os.getenv("CLAUDE_MODEL", "claude-3-5-haiku-20241022")
+CLAUDE_MODEL = os.getenv("CLAUDE_MODEL", "claude-haiku-4-5-20251001")
 
 # --- Scoring ---
 SCORE_THRESHOLD = int(os.getenv("SCORE_THRESHOLD", "71"))
